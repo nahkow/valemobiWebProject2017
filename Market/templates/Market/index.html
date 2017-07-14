@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Deals</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Market/style.css' %}">
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container custom-height">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading c-list">
+                <span class="title">Deals</span>
+                <ul class="pull-right c-controls">
+                    <li><a href="{% url 'Market:create_Deal' %}" data-toggle="tooltip" data-placement="top"
+                           title="Add Deal"><i class="glyphicon glyphicon-plus">Deal</i></a></li>
+                    <li><a href="{% url 'Market:create_item' %}" data-toggle="tooltip" data-placement="top"
+                           title="Add Item"><i class="glyphicon glyphicon-plus">Item</i></a></li>
+
+
+                </ul>
+            </div>
+
+        </div>
+        <ul class="list-group" id="contact-list">
+            {% if all_deals %}
+                {% for deal in all_deals %}
+                    <li class="list-group-item">
+                        <div class="col-xs-12 col-sm-9">
+                                <span class="name">
+                                    Deal: {{ deal.id }}
+                                    <a href="{% url 'Market:delete_deal' deal.id %}">
+                                        <span class="glyphicon small glyphicon-trash"></span>
+                                    </a>
+                                </span><br/>
+                            <span class=""><h4> <a>Item: {{ deal.deal_item }}</h4> </span>
+                            <span class=""><h4> Tipo:{{ deal.deal_type }}</h4> </span>
+                            <span class=""><h4> Qtd:{{ deal.qtd }}</h4> </span>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                {% endfor %}
+            {% else %}
+            {% endif %}
+
+        </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>
